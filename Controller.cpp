@@ -4,12 +4,21 @@
 
 #include "Controller.h"
 
-Controller::Controller(std::deque<int32_t>& floorsToVisit)
-: m_FloorsToVisit(floorsToVisit)
+#include <memory>
+
+#include "Elevator.h"
+
+Controller::Controller(Elevator& elevator, const std::deque<int32_t>& floorsToVisit)
+: m_Elevator(elevator), m_FloorsToVisit(floorsToVisit)
 {
 }
 
-std::deque<int32_t> Controller::FloorsToVisit() const
+const Elevator& Controller::GetElevator() const
+{
+    return m_Elevator;
+}
+
+std::deque<int32_t> Controller::GetFloorsToVisit() const
 {
     return m_FloorsToVisit;
 }

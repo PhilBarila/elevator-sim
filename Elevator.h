@@ -7,6 +7,7 @@
 
 #include <chrono>
 #include <cstdint>
+#include <deque>
 
 using namespace std::chrono_literals;
 
@@ -15,12 +16,13 @@ public:
     Elevator() = default;
     explicit Elevator(int32_t floor);
     void Move(int32_t floor);
-    [[nodiscard]] int32_t CurrentFloor() const;
-    [[nodiscard]] std::chrono::seconds TotalTravelTime() const;
+    [[nodiscard]] int32_t GetCurrentFloor() const;
+    [[nodiscard]] std::chrono::seconds GetTotalTravelTime() const;
     static constexpr std::chrono::seconds TravelTimeForSingleFloor = 10s;
 private:
-    int32_t m_CurrentFloor;
-    std::chrono::seconds m_TotalTravelTime;
+    int32_t m_CurrentFloor{};
+    std::chrono::seconds m_TotalTravelTime{};
+    std::deque<int32_t> m_VisitedFloors{};
 };
 
 #endif //ELEVATOR_H

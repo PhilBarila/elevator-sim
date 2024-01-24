@@ -7,12 +7,17 @@
 #include <cstdint>
 #include <deque>
 
+#include "Elevator.h"
+
 class Controller {
 public:
-    Controller() = default;
-    explicit Controller(std::deque<int32_t>& floorsToVisit);
-    [[nodiscard]] std::deque<int32_t> FloorsToVisit() const;
+    Controller() = delete;
+    explicit Controller(Elevator& elevator, const std::deque<int32_t>& floorsToVisit);
+
+    [[nodiscard]] const Elevator& GetElevator() const;
+    [[nodiscard]] std::deque<int32_t> GetFloorsToVisit() const;
 private:
+    Elevator& m_Elevator;
     std::deque<int32_t> m_FloorsToVisit;
 };
 

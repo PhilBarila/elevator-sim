@@ -8,15 +8,11 @@
 
 #include "Controller.h"
 
-TEST(ControllerTest, BasicConstruction)
-{
-    const auto target = std::make_unique<Controller>();
-    EXPECT_NE(target.get(), nullptr);
-}
-
 TEST(ControllerTest, QueueConstructor)
 {
+    Elevator elevator{};
     std::deque floors{1,2,3,4};
-    const auto target = std::make_unique<Controller>(floors);
-    EXPECT_EQ(target->FloorsToVisit(), floors);
+    const auto target = std::make_unique<Controller>(elevator, floors);
+    EXPECT_EQ(target->GetFloorsToVisit(), floors);
+    EXPECT_EQ(&target->GetElevator(), &elevator);
 }

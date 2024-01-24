@@ -6,7 +6,6 @@
 
 Elevator::Elevator(int32_t floor)
 : m_CurrentFloor(floor)
-, m_TotalTravelTime()
 {
 }
 
@@ -16,12 +15,12 @@ void Elevator::Move(int32_t floor)
     m_CurrentFloor = floor;
 }
 
-int32_t Elevator::CurrentFloor() const
+int32_t Elevator::GetCurrentFloor() const
 {
     return m_CurrentFloor;
 }
 
-std::chrono::seconds Elevator::TotalTravelTime() const
+std::chrono::seconds Elevator::GetTotalTravelTime() const
 {
     return m_TotalTravelTime;
 }
