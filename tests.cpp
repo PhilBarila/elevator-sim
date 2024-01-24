@@ -9,7 +9,16 @@
 TEST(ElevatorTest, BasicConstruction)
 {
     auto target = std::make_unique<Elevator>();
-    EXPECT_NE(nullptr, target.get());
+    EXPECT_NE(target.get(), nullptr);
+    EXPECT_EQ(target->CurrentFloor(), 0);
+    EXPECT_EQ(target->TotalTravelTime(), 0s);
 }
 
-
+TEST(ElevatorTest, MoveTest)
+{
+    auto target = std::make_unique<Elevator>();
+    uint32_t floor = 1;
+    target->Move(floor);
+    EXPECT_EQ(target->CurrentFloor(), floor);
+    EXPECT_EQ(target->TotalTravelTime(), Elevator::TravelTimeForSingleFloor);
+}

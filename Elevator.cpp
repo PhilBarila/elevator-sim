@@ -3,3 +3,19 @@
 //
 
 #include "Elevator.h"
+
+void Elevator::Move(int32_t floor)
+{
+    m_TotalTravelTime += TravelTimeForSingleFloor * std::abs(floor - m_CurrentFloor);
+    m_CurrentFloor = floor;
+}
+
+int32_t Elevator::CurrentFloor() const
+{
+    return m_CurrentFloor;
+}
+
+std::chrono::seconds Elevator::TotalTravelTime()
+{
+    return m_TotalTravelTime;
+}
