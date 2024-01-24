@@ -4,6 +4,12 @@
 
 #include "Elevator.h"
 
+Elevator::Elevator(int32_t floor)
+: m_CurrentFloor(floor)
+, m_TotalTravelTime()
+{
+}
+
 void Elevator::Move(int32_t floor)
 {
     m_TotalTravelTime += TravelTimeForSingleFloor * std::abs(floor - m_CurrentFloor);

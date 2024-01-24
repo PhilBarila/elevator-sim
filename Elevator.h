@@ -11,6 +11,7 @@ using namespace std::chrono_literals;
 class Elevator {
 public:
     Elevator() = default;
+    explicit Elevator(int32_t floor);
     void Move(int32_t floor);
     [[nodiscard]] int32_t CurrentFloor() const;
     std::chrono::seconds TotalTravelTime();
