@@ -6,13 +6,7 @@
 
 #include "Elevator.h"
 
-TEST(ElevatorTest, BasicConstruction)
-{
-    const auto target = std::make_unique<Elevator>();
-    EXPECT_NE(target.get(), nullptr);
-    EXPECT_EQ(target->GetCurrentFloor(), 0);
-    EXPECT_EQ(target->GetTotalTravelTime(), 0s);
-}
+static constexpr int32_t DEFAULT_FLOOR = 1;
 
 TEST(ElevatorTest, InitialFloorConstruction)
 {
@@ -21,29 +15,35 @@ TEST(ElevatorTest, InitialFloorConstruction)
     EXPECT_NE(target.get(), nullptr);
     EXPECT_EQ(target->GetCurrentFloor(), initialFloor);
     EXPECT_EQ(target->GetTotalTravelTime(), 0s);
+    const auto expectedFloors = std::deque{initialFloor};
+    EXPECT_EQ(target->GetVisitedFloors(), expectedFloors);
 }
 
-TEST(ElevatorTest, MoveOneFloorTest)
+TEST(ElevatorTest, MoveToFloorOneFromOne)
 {
-    const auto target = std::make_unique<Elevator>();
+    const auto target = std::make_unique<Elevator>(DEFAULT_FLOOR);
     constexpr int32_t floor = 1;
     target->Move(floor);
     EXPECT_EQ(target->GetCurrentFloor(), floor);
-    EXPECT_EQ(target->GetTotalTravelTime(), Elevator::TravelTimeForSingleFloor);
+    EXPECT_EQ(target->GetTotalTravelTime(), 0s);
+    const auto expectedFloors = std::deque{DEFAULT_FLOOR};
+    EXPECT_EQ(target->GetVisitedFloors(), expectedFloors);
 }
 
-TEST(ElevatorTest, MoveToFloorTenTest)
+TEST(ElevatorTest, MoveToFloorTenFromOne)
 {
-    const auto target = std::make_unique<Elevator>();
+    const auto target = std::make_unique<Elevator>(1);
     constexpr int32_t floor = 10;
     target->Move(floor);
     EXPECT_EQ(target->GetCurrentFloor(), floor);
-    EXPECT_EQ(
-        target->GetTotalTravelTime(), Elevator::TravelTimeForSingleFloor * floor
-        );
+    constexpr std::chrono::seconds expectedTravelTime =
+        Elevator::TravelTimeForSingleFloor * (floor - DEFAULT_FLOOR);
+    EXPECT_EQ(target->GetTotalTravelTime(), expectedTravelTime);
+    const auto expectedFloors = std::deque{DEFAULT_FLOOR, floor};
+    EXPECT_EQ(target->GetVisitedFloors(), expectedFloors);
 }
 
-TEST(ElevatorTest, MoveToFloorTenFromInitialTest)
+TEST(ElevatorTest, MoveToFloorTenFromInitial)
 {
     constexpr int32_t initialFloor = 42;
     const auto target = std::make_unique<Elevator>(initialFloor);
@@ -54,23 +54,28 @@ TEST(ElevatorTest, MoveToFloorTenFromInitialTest)
     constexpr std::chrono::seconds expectedTravelTime =
         distance * Elevator::TravelTimeForSingleFloor;
     EXPECT_EQ(target->GetTotalTravelTime(),  expectedTravelTime);
+    const auto expectedFloors = std::deque{initialFloor, floor};
+    EXPECT_EQ(target->GetVisitedFloors(), expectedFloors);
 }
 
-TEST(ElevatorTest, VisitMultipleFloorsTest)
+TEST(ElevatorTest, VisitMultipleFloors)
 {
-    const auto target = std::make_unique<Elevator>();
+    const auto target = std::make_unique<Elevator>(DEFAULT_FLOOR);
     constexpr int32_t firstFloor = 10;
     constexpr int32_t secondFloor = 3;
-    constexpr int32_t distance = firstFloor + std::abs(firstFloor - secondFloor);
+    constexpr int32_t distance =
+        firstFloor - DEFAULT_FLOOR + std::abs(firstFloor - secondFloor);
     constexpr std::chrono::seconds expectedTravelTime =
         distance * Elevator::TravelTimeForSingleFloor;
     target->Move(firstFloor);
     target->Move(secondFloor);
     EXPECT_EQ(target->GetCurrentFloor(), secondFloor);
     EXPECT_EQ(target->GetTotalTravelTime(), expectedTravelTime);
+    const auto expectedFloors = std::deque{DEFAULT_FLOOR, firstFloor, secondFloor};
+    EXPECT_EQ(target->GetVisitedFloors(), expectedFloors);
 }
 
-TEST(ElevatorTest, VisitMultipleFloorsFromInitialTest)
+TEST(ElevatorTest, VisitMultipleFloorsFromInitial)
 {
     constexpr int32_t initialFloor = 42;
     const auto target = std::make_unique<Elevator>(initialFloor);
@@ -84,4 +89,6 @@ TEST(ElevatorTest, VisitMultipleFloorsFromInitialTest)
     target->Move(secondFloor);
     EXPECT_EQ(target->GetCurrentFloor(), secondFloor);
     EXPECT_EQ(target->GetTotalTravelTime(), expectedTravelTime);
+    const auto expectedFloors = std::deque{initialFloor, firstFloor, secondFloor};
+    EXPECT_EQ(target->GetVisitedFloors(), expectedFloors);
 }
