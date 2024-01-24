@@ -15,11 +15,17 @@ FetchContent_MakeAvailable(googletest)
 
 add_executable(elevator_sim main.cpp
         Elevator.cpp
-        Elevator.h)
+        Elevator.h
+        Controller.cpp
+        Controller.h)
 
-add_executable(elevator_sim_tests elevator_tests.cpp
+add_executable(elevator_sim_tests
+        elevator_tests.cpp
+        controller_tests.cpp
         Elevator.cpp
-        Elevator.h)
+        Elevator.h
+        Controller.cpp
+        Controller.h)
 
 target_link_libraries(elevator_sim_tests GTest::gtest_main)
 

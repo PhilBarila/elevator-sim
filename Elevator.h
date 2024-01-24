@@ -4,7 +4,9 @@
 
 #ifndef ELEVATOR_H
 #define ELEVATOR_H
+
 #include <chrono>
+#include <cstdint>
 
 using namespace std::chrono_literals;
 
