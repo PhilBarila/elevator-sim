@@ -17,11 +17,11 @@ add_executable(elevator_sim main.cpp
         Elevator.cpp
         Elevator.h)
 
-add_executable(elevator_tests tests.cpp
+add_executable(elevator_sim_tests elevator_tests.cpp
         Elevator.cpp
         Elevator.h)
 
-target_link_libraries(elevator_tests GTest::gtest_main)
+target_link_libraries(elevator_sim_tests GTest::gtest_main)
 
 include(GoogleTest)
-gtest_discover_tests(elevator_tests)
+gtest_discover_tests(elevator_sim_tests)
