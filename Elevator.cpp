@@ -21,7 +21,7 @@ int32_t Elevator::CurrentFloor() const
     return m_CurrentFloor;
 }
 
-std::chrono::seconds Elevator::TotalTravelTime()
+std::chrono::seconds Elevator::TotalTravelTime() const
 {
     return m_TotalTravelTime;
 }

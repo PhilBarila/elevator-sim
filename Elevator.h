@@ -14,7 +14,7 @@ public:
     explicit Elevator(int32_t floor);
     void Move(int32_t floor);
     [[nodiscard]] int32_t CurrentFloor() const;
-    std::chrono::seconds TotalTravelTime();
+    [[nodiscard]] std::chrono::seconds TotalTravelTime() const;
     static constexpr std::chrono::seconds TravelTimeForSingleFloor = 10s;
 private:
     int32_t m_CurrentFloor;
