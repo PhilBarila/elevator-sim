@@ -55,3 +55,17 @@ TEST(ElevatorTest, MoveToFloorTenFromInitialTest)
         distance * Elevator::TravelTimeForSingleFloor;
     EXPECT_EQ(target->TotalTravelTime(),  expectedTravelTime);
 }
+
+TEST(ElevatorTest, VisitMultipleFloorsTest)
+{
+    const auto target = std::make_unique<Elevator>();
+    constexpr int32_t firstFloor = 10;
+    constexpr int32_t secondFloor = 3;
+    constexpr int32_t distance = firstFloor + std::abs(firstFloor - secondFloor);
+    constexpr std::chrono::seconds expectedTravelTime =
+        distance * Elevator::TravelTimeForSingleFloor;
+    target->Move(firstFloor);
+    target->Move(secondFloor);
+    EXPECT_EQ(target->CurrentFloor(), secondFloor);
+    EXPECT_EQ(target->TotalTravelTime(), expectedTravelTime);
+}
