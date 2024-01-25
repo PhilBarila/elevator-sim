@@ -25,6 +25,7 @@ add_executable(elevator_sim_tests
         elevator_tests.cpp
         controller_tests.cpp
         argparser_tests.cpp
+        arg_parser_tests.cpp
         Elevator.cpp
         Elevator.h
         Controller.cpp
