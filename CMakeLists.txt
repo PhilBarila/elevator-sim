@@ -19,19 +19,23 @@ add_executable(elevator_sim main.cpp
         Controller.cpp
         Controller.h
         ArgParser.cpp
-        ArgParser.h)
+        ArgParser.h
+        OutputFormatter.cpp
+        OutputFormatter.h)
 
 add_executable(elevator_sim_tests
         elevator_tests.cpp
         controller_tests.cpp
-        argparser_tests.cpp
         arg_parser_tests.cpp
+        output_formatter_tests.cpp
         Elevator.cpp
         Elevator.h
         Controller.cpp
         Controller.h
         ArgParser.cpp
-        ArgParser.h)
+        ArgParser.h
+        OutputFormatter.cpp
+        OutputFormatter.h)
 
 target_link_libraries(elevator_sim_tests GTest::gtest_main)
 

@@ -9,7 +9,7 @@
 #include <cstdint>
 #include <deque>
 
-using namespace std::chrono_literals;
+using std::chrono_literals::operator ""s;
 
 class Elevator
 {

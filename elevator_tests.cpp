@@ -92,3 +92,21 @@ TEST(ElevatorTest, VisitMultipleFloorsFromInitial)
     const auto expectedFloors = std::deque{ initialFloor, firstFloor, secondFloor };
     EXPECT_EQ(target->GetVisitedFloors(), expectedFloors);
 }
+
+TEST(ElevatorTest, GetVisitedFloorString)
+{
+    constexpr int32_t initialFloor = 42;
+    const auto target = std::make_unique<Elevator>(initialFloor);
+    constexpr int32_t firstFloor = 10;
+    constexpr int32_t secondFloor = 17;
+    constexpr int32_t distance =
+        std::abs(initialFloor - firstFloor) + std::abs(firstFloor - secondFloor);
+    constexpr std::chrono::seconds expectedTravelTime =
+        distance * Elevator::TravelTimeForSingleFloor;
+    target->Move(firstFloor);
+    target->Move(secondFloor);
+    EXPECT_EQ(target->GetCurrentFloor(), secondFloor);
+    EXPECT_EQ(target->GetTotalTravelTime(), expectedTravelTime);
+    const auto expectedFloors = std::deque{ initialFloor, firstFloor, secondFloor };
+    EXPECT_EQ(target->GetVisitedFloors(), expectedFloors);
+}

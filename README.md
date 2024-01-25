@@ -5,7 +5,7 @@ Controller class simulates the control panel.  None of the door interlock or any
 other real-world safety considerations have been included.
 
 The controller does *not* implement an elevator sort, as the project description
-demonstrated the order in is the order used.  The elevator *does* ignore requests
+demonstrated pure FIFO ordering used.  The elevator *does* ignore requests
 to move to the current floor.
 
 ## Would have been nice:
@@ -16,3 +16,9 @@ figuring out how to clean it up enough to be satisfied with it.
 
 ### REPL for interactive floor selection
 Also can be done, outside the scope of the project.
+
+### Ill-formed data protection
+Doesn't protect against non-numeric data in the input floor spec.
+
+### Author
+Phil Barila
