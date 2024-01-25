@@ -16,7 +16,7 @@ void Elevator::Move(const int32_t floor)
     {
         m_TotalTravelTime += TravelTimeForSingleFloor * std::abs(floor - m_CurrentFloor);
         m_CurrentFloor = floor;
-        m_VisitedFloors.emplace_back(floor);
+        m_VisitedFloors.push_back(floor);
     }
 }
 

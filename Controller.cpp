@@ -22,3 +22,11 @@ std::deque<int32_t> Controller::GetFloorsToVisit() const
 {
     return m_FloorsToVisit;
 }
+
+void Controller::Execute()
+{
+    for (auto floor : m_FloorsToVisit)
+    {
+        m_Elevator.Move(floor);
+    }
+}

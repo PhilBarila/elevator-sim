@@ -16,6 +16,8 @@ public:
 
     [[nodiscard]] const Elevator& GetElevator() const;
     [[nodiscard]] std::deque<int32_t> GetFloorsToVisit() const;
+    void Execute();
+
 private:
     Elevator& m_Elevator;
     std::deque<int32_t> m_FloorsToVisit;
