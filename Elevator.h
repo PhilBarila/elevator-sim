@@ -11,7 +11,8 @@
 
 using namespace std::chrono_literals;
 
-class Elevator {
+class Elevator
+{
 public:
     Elevator() = delete;
     explicit Elevator(int32_t floor);

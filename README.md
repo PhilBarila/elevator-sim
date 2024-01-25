@@ -5,7 +5,8 @@ Controller class simulates the control panel.  None of the door interlock or any
 other real-world safety considerations have been included.
 
 The controller does *not* implement an elevator sort, as the project description
-demonstrated the order in is the order used.
+demonstrated the order in is the order used.  The elevator *does* ignore requests
+to move to the current floor.
 
 ## Would have been nice:
 ### Parameterized tests.

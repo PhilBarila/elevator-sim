@@ -9,7 +9,8 @@
 
 #include "Elevator.h"
 
-class Controller {
+class Controller
+{
 public:
     Controller() = delete;
     explicit Controller(Elevator& elevator, const std::deque<int32_t>& floorsToVisit);

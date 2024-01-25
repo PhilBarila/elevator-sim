@@ -13,7 +13,7 @@
 
 static constexpr int32_t DEFAULT_FLOOR = 1;
 
-TEST(ControllerTest, QueueConstructor)
+TEST(ControllerTest, Constructor)
 {
     Elevator elevator(DEFAULT_FLOOR);
     std::deque floors{ 1, 2, 3, 4 };
